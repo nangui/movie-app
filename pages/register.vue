@@ -1,11 +1,5 @@
 <script setup>
-import { createClient } from "@supabase/supabase-js/dist/main/index.js";
 import { reactive } from "vue";
-
-const { supabaseUrl, supabasePublicKey } = useRuntimeConfig();
-const supabase = createClient(supabaseUrl, supabasePublicKey);
-
-// console.log(supabase);
 
 const registerState = reactive({
   email: "",
@@ -15,13 +9,26 @@ const registerState = reactive({
 });
 
 const signUp = async () => {
-  const { user, error } = await supabase.auth.signUp({
-    email: registerState.email,
-    password: registerState.password,
-  });
+  try {
+    const response = await fetch("/api/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "signup",
+        email: registerState.email,
+        password: registerState.password,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
 
-  registerState.user = user;
-  registerState.error = error;
+    // registerState.user = user;
+    // registerState.error = error;
+  } catch (error) {
+    console.log(error);
+  }
 };
 </script>
 <template>
