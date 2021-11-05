@@ -33,7 +33,7 @@ async function search() {
   </div>
 </template>
 
-<style>
+<style scoped>
 .form {
   display: flex;
   justify-content: center;
@@ -43,10 +43,15 @@ async function search() {
 
 /* Input search */
 .input {
-  width: 320px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
   height: 46px;
-  border: 1px solid #ccc;
+  width: 320px;
+  font-size: 20px;
+  color: white;
   padding: 0 10px;
+  padding-left: 20px;
 }
 
 /* Search button */
@@ -54,7 +59,7 @@ async function search() {
   background-color: var(--primary-color);
   border: none;
   color: var(--tertiary-color);
-  padding: 15px 32px;
+  padding: 14px 30px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;

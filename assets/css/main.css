@@ -5,7 +5,7 @@
   --primary-color: #f2b134;
   --primary-color-dark: #e49e1d;
   --secondary-color: #121620;
-  --tertiary-color: #1c212e;
+  --tertiary-color: #212c4f;
   --main-bg-color: #121620;
   --text-color: #ffffff;
   --text-grey: #828282;
@@ -20,6 +20,7 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 body {

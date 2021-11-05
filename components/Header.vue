@@ -1,4 +1,21 @@
 <script setup>
+import { ref } from "vue";
+
+const navLinks = ref({
+  home: {
+    name: "Home",
+    href: "/",
+  },
+  login: {
+    name: "Login",
+    href: "/login",
+  },
+  register: {
+    name: "register",
+    href: "/register",
+  },
+});
+
 onMounted(() => {
   const header = document.querySelector(".header");
   const sticky = header.offsetTop;
@@ -24,8 +41,12 @@ onMounted(() => {
         <p class="logo"><span>NuxtApp</span>.com</p>
       </div>
       <div class="header__menu">
-        <NuxtLink class="header__menu_link" to="/login">Login</NuxtLink>
-        <NuxtLink class="header__menu_link" to="/register">Register</NuxtLink>
+        <NuxtLink class="header__menu_link" :to="navLinks.login.href">{{
+          navLinks.login.name
+        }}</NuxtLink>
+        <NuxtLink class="header__menu_link" :to="navLinks.register.href">{{
+          navLinks.register.name
+        }}</NuxtLink>
       </div>
     </div>
   </nav>
@@ -35,7 +56,6 @@ onMounted(() => {
 .header {
   padding: 30px 16px;
   color: #f1f1f1;
-  transition: all 0.5s ease;
 }
 
 .sticky {

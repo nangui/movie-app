@@ -19,8 +19,8 @@
   align-items: center;
   background: var(--tertiary-color);
   color: var(--text-secondary-color);
-  margin-top: 1.5rem;
-  padding: 3rem;
+  margin-top: 3rem;
+  padding: 2.5rem;
 }
 
 p {
