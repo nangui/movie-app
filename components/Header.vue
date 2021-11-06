@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from "vue";
 
+const isAuth = ref(false);
+
 const navLinks = ref({
   home: {
     name: "Home",
@@ -11,14 +13,26 @@ const navLinks = ref({
     href: "/login",
   },
   register: {
-    name: "register",
+    name: "Register",
     href: "/register",
+  },
+  dashboard: {
+    name: "Dashboard",
+    href: "/dashboard",
+  },
+  logout: {
+    name: "Logout",
+    href: "/logout",
   },
 });
 
 onMounted(() => {
   const header = document.querySelector(".header");
   const sticky = header.offsetTop;
+
+  const storage = JSON.parse(localStorage.getItem("supabase.auth.token"));
+  const currentSession = storage ? storage.currentSession : null;
+  isAuth.value = currentSession?.user ? true : false;
 
   window.addEventListener(
     "scroll",
@@ -41,10 +55,13 @@ onMounted(() => {
         <p class="logo"><span>NuxtApp</span>.com</p>
       </div>
       <div class="header__menu">
-        <NuxtLink class="header__menu_link" :to="navLinks.login.href">{{
+        <NuxtLink class="header__menu_link" v-if="isAuth" :to="navLinks.dashboard.href">{{
+          navLinks.dashboard.name
+        }}</NuxtLink>
+        <NuxtLink class="header__menu_link" v-if="!isAuth" :to="navLinks.login.href">{{
           navLinks.login.name
         }}</NuxtLink>
-        <NuxtLink class="header__menu_link" :to="navLinks.register.href">{{
+        <NuxtLink class="header__menu_link" v-if="!isAuth" :to="navLinks.register.href">{{
           navLinks.register.name
         }}</NuxtLink>
       </div>

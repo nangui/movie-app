@@ -1,5 +1,9 @@
 <script setup>
+import { createClient } from "@supabase/supabase-js/dist/main/index.js";
 import { reactive } from "vue";
+
+const { supabaseUrl, supabasePublicKey } = useRuntimeConfig();
+const supabase = createClient(supabaseUrl, supabasePublicKey);
 
 const registerState = reactive({
   email: "",
@@ -9,25 +13,19 @@ const registerState = reactive({
 });
 
 const signUp = async () => {
-  try {
-    const response = await fetch("/api/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        type: "signup",
-        email: registerState.email,
-        password: registerState.password,
-      }),
-    });
-    const data = await response.json();
-    console.log(data);
+  const { user, error } = await supabase.auth.signUp({
+    email: registerState.email,
+    password: registerState.password,
+  });
+  registerState.email = "";
+  registerState.password = "";
 
-    // registerState.user = user;
-    // registerState.error = error;
-  } catch (error) {
-    console.log(error);
+  if (error) {
+    window.alert("Account creation failed");
+    registerState.error = error;
+  } else {
+    registerState.user = user;
+    window.alert("Account created");
   }
 };
 </script>

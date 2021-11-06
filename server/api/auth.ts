@@ -1,6 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'http';
 import { StringDecoder } from 'string_decoder'
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js/dist/main/index.js';
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
   let data: any = { data: [ { data: "" } ] };
@@ -31,7 +31,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     console.log(data);
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.write(JSON.stringify(data));
+    res.write(data);
     res.end();
   });
 }

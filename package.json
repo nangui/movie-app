@@ -9,7 +9,6 @@
     "nuxt3": "latest"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^1.25.2",
-    "vuex": "^4.0.2"
+    "@supabase/supabase-js": "^1.25.2"
   }
 }
